@@ -28,6 +28,9 @@ import router from './route.js';
 // Sets up the pinia store
 import pinia from './stores';
 
+// Sets up i18n (internationalization)
+import i18n from './i18n';
+
 // Register Font Awesome icon component
 Vue.component('icon', () => import('vue-awesome/components/Icon.vue'));
 
@@ -86,6 +89,7 @@ import App from './App.vue';
 new Vue({
   el: '#app',
   router: router,
+  i18n,
   render: h => h(App),
   pinia,
 });

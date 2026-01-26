@@ -1,6 +1,10 @@
 <template lang="pug">
 div
-  h3 Settings
+  h3 {{ $t('settings.title') }}
+
+  hr
+
+  LanguageSettings
 
   hr
 
@@ -42,6 +46,7 @@ div
 <script lang="ts">
 import { useSettingsStore } from '~/stores/settings';
 
+import LanguageSettings from '~/views/settings/LanguageSettings.vue';
 import DaystartSettings from '~/views/settings/DaystartSettings.vue';
 import TimelineDurationSettings from '~/views/settings/TimelineDurationSettings.vue';
 import ReleaseNotificationSettings from '~/views/settings/ReleaseNotificationSettings.vue';
@@ -55,6 +60,7 @@ import ActivePatternSettings from '~/views/settings/ActivePatternSettings.vue';
 export default {
   name: 'Settings',
   components: {
+    LanguageSettings,
     DaystartSettings,
     TimelineDurationSettings,
     ReleaseNotificationSettings,

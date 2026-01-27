@@ -1,31 +1,33 @@
 <template lang="pug">
 div
   h5.d-inline-block
-    div Categorization
+    div {{ $t('settings.categorization') }}
   div.float-right
     b-btn.ml-1(@click="restoreDefaultClasses", variant="outline-warning" size="sm")
       icon(name="undo")
-      | Restore defaults
+      | {{ $t('common.restoreDefaults') }}
     label.btn.btn-sm.ml-1.btn-outline-primary(style="margin: 0")
-      | Import
+      | {{ $t('common.import') }}
       input(type="file" @change="importCategories" hidden)
     b-btn.ml-1(@click="exportClasses", variant="outline-primary" size="sm")
-      | Export
+      | {{ $t('common.export') }}
   p
-    | Rules for categorizing events. An event can only have one category. If several categories match, the deepest one will be chosen.
+    | {{ $t('settings.categorizationDescription') }}
   p
-    | You can use the #[router-link(:to="{ path: '/settings/category-builder' }") Category Builder] to quickly create categories from uncategorized activity.
-    | You can also find and share categorization rule presets on #[a(href="https://forum.activitywatch.net/c/projects/category-rules") the forum].
-    | For help on how to write categorization rules, see #[a(href="https://docs.activitywatch.net/en/latest/features/categorization.html") the documentation].
+    | {{ $t('settings.categoryBuilderDescription') }}
+  p
+    | {{ $t('settings.categoryPresets') }}
+  p
+    | {{ $t('settings.categoryDocs') }}
 
   div.my-4
     b-alert(variant="warning" :show="classes_unsaved_changes")
-      | You have unsaved changes!
+      | {{ $t('settings.unsavedChanges') }}
       div.float-right(style="margin-top: -0.15em; margin-right: -0.6em")
         b-btn.ml-2(@click="saveClasses", variant="success" size="sm")
-          | Save
+          | {{ $t('common.save') }}
         b-btn.ml-2(@click="resetClasses", variant="warning" size="sm")
-          | Discard
+          | {{ $t('common.discard') }}
     div(v-for="_class in classes_hierarchy")
       CategoryEditTree(:_class="_class")
     div(v-if="editingId !== null")
@@ -35,9 +37,9 @@ div
     div.col-sm-12
       b-btn(@click="addClass")
         icon.mr-2(name="plus")
-        | Add category
+        | {{ $t('settings.addCategory') }}
       b-btn.float-right(@click="saveClasses", variant="success" :disabled="!classes_unsaved_changes")
-        | Save
+        | {{ $t('common.save') }}
 </template>
 <script lang="ts">
 import { mapState, mapGetters } from 'pinia';
@@ -49,8 +51,6 @@ import router from '~/route';
 import { useCategoryStore } from '~/stores/categories';
 
 import _ from 'lodash';
-
-const confirmationMessage = 'Your categories have unsaved changes, are you sure you want to leave?';
 
 export default {
   name: 'CategorizationSettings',
@@ -66,6 +66,9 @@ export default {
   computed: {
     ...mapState(useCategoryStore, ['classes_unsaved_changes']),
     ...mapGetters(useCategoryStore, ['classes_hierarchy']),
+    confirmationMessage() {
+      return this.$t('settings.confirmLeave');
+    },
   },
   mounted() {
     this.categoryStore.load();
@@ -79,7 +82,7 @@ export default {
     this.routerGuardRemover = router.beforeEach((to, from, next) => {
       try {
         if (this.classes_unsaved_changes) {
-          if (confirm(confirmationMessage)) {
+          if (confirm(this.confirmationMessage)) {
             next();
           } else {
             next(false);
@@ -150,7 +153,7 @@ export default {
       // Get file from upload
       const file = elem.target.files[0];
       if (file.type != 'application/json') {
-        console.error('Only JSON files are possible to import');
+        console.error(this.$t('errors.importOnlyJSON'));
         return;
       }
 
@@ -165,8 +168,8 @@ export default {
       if (this.classes_unsaved_changes) {
         e = e || window.event;
         e.preventDefault();
-        e.returnValue = confirmationMessage;
-        return confirmationMessage;
+        e.returnValue = this.confirmationMessage;
+        return this.confirmationMessage;
       }
     },
   },

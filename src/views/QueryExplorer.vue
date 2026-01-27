@@ -1,9 +1,9 @@
 <template lang="pug">
 
 div
-  h3 Query Explorer
+  h3 {{ $t('query.title') }}
 
-  | See #[a(href="https://docs.activitywatch.net/en/latest/examples/querying-data.html") the documentation] for help on how to write queries.
+  | {{ $t('query.seeDocumentation') }} #[a(href="https://docs.activitywatch.net/en/latest/examples/querying-data.html") {{ $t('home.documentation') }}]
 
   hr
 
@@ -13,17 +13,17 @@ div
   form
     div.form-row
       div.form-group.col-md-6
-        | Start
+        | {{ $t('common.start') }}
         input.form-control(type="date", :max="today", v-model="startdate")
       div.form-group.col-md-6
-        | End
+        | {{ $t('common.end') }}
         input.form-control(type="date", :max="tomorrow", v-model="enddate")
 
     div.form-group
       textarea.form-control(v-model="query_code", @keypress.ctrl.enter="query()" style="font-family: monospace", rows=10)
     div.form-inline
       div.form-group
-        button.btn.btn-success(type="button", @click="query()") Query
+        button.btn.btn-success(type="button", @click="query()") {{ $t('query.runQuery') }}
       span(style="padding-left: 1em;")
       | {{eventcount_str}}
 
@@ -72,7 +72,7 @@ RETURN = sort_by_duration(merged_events);
   },
   computed: {
     eventcount_str: function () {
-      if (Array.isArray(this.events)) return 'Number of events: ' + this.events.length;
+      if (Array.isArray(this.events)) return this.$t('query.numberOfEvents') + ': ' + this.events.length;
       else return '';
     },
   },
@@ -85,7 +85,7 @@ RETURN = sort_by_duration(merged_events);
         const categoryRules = useCategoryStore().classes_for_query;
 
         if (useCategoryStore().classes_for_query.length === 0) {
-          this.error = '__CATEGORIES__ was used in query but no categories have been defined yet.';
+          this.error = this.$t('errors.categoriesNotDefined');
           return;
         }
 

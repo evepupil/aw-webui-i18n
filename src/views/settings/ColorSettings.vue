@@ -1,9 +1,9 @@
 <template lang="pug">
 div.d-flex.justify-content-between
   div
-    h5.mb-0 Use fallback colors
+    h5.mb-0 {{ $t('settings.colorSettings') }}
     small
-      | Uses the old coloring style for some visualizations when uncategorized or no category color.
+      | {{ $t('settings.colorSettingsDescription') }}
   div
     b-form-checkbox(v-model="useColorFallback", switch)
 </template>

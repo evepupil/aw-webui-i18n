@@ -1,53 +1,53 @@
 <template lang="pug">
 // The category edit modal
-b-modal(id="edit" ref="edit" title="Edit category" @show="resetModal" @hidden="hidden" @ok="handleOk")
+b-modal(id="edit" ref="edit" :title="$t('category.editCategory')" @show="resetModal" @hidden="hidden" @ok="handleOk")
   div.my-1
-    b-input-group.my-1(prepend="Name")
+    b-input-group.my-1(:prepend="$t('category.name')")
       b-form-input(v-model="editing.name")
-    b-input-group(prepend="Parent")
+    b-input-group(:prepend="$t('category.parent')")
       b-select(v-model="editing.parent", :options="allCategories")
     //| ID: {{editing.id}}
 
   hr
   div.my-1
-    b Rule
-    b-input-group.my-1(prepend="Type")
+    b {{ $t('category.rule') }}
+    b-input-group.my-1(:prepend="$t('category.ruleType')")
       b-select(v-model="editing.rule.type", :options="allRuleTypes")
     div(v-if="editing.rule.type === 'regex'")
-      b-input-group.my-1(prepend="Pattern")
+      b-input-group.my-1(:prepend="$t('category.pattern')")
         b-form-input(v-model="editing.rule.regex")
       div.d-flex
         div.flex-grow-1
           b-form-checkbox(v-model="editing.rule.ignore_case" switch)
-            | Case insensitive
+            | {{ $t('category.caseInsensitive') }}
         div.flex-grow-1
           small.text-right
             //div(v-if="valid" style="color: green") Valid
-            div(v-if="!validPattern" style="color: red") Invalid pattern
-            div(v-if="validPattern && broad_pattern" style="color: orange") Pattern too broad
+            div(v-if="!validPattern" style="color: red") {{ $t('category.invalidPattern') }}
+            div(v-if="validPattern && broad_pattern" style="color: orange") {{ $t('category.patternTooBroad') }}
 
   hr
   div.my-1
-    b Color
+    b {{ $t('category.color') }}
 
     b-form-checkbox(v-model="editing.inherit_color" switch)
-      | Inherit parent color
+      | {{ $t('category.inheritParentColor') }}
     div.mt-1(v-show="!editing.inherit_color")
       color-picker(v-model="editing.color")
 
   hr
   div.my-1
-    b Productivity score
+    b {{ $t('category.productivityScore') }}
     b-form-checkbox(v-model="editing.inherit_score" switch)
-      | Inherit parent score
-    b-input-group.my-1(prepend="Score" v-if="!editing.inherit_score")
+      | {{ $t('category.inheritParentScore') }}
+    b-input-group.my-1(:prepend="$t('category.score')" v-if="!editing.inherit_score")
       b-form-input(v-model="editing.score")
 
   hr
   div.my-1
     b-btn(variant="danger", @click="removeClass(categoryId); $refs.edit.hide()")
       icon(name="trash")
-      | Remove category
+      | {{ $t('category.removeCategory') }}
 </template>
 
 <script lang="ts">
@@ -85,12 +85,15 @@ export default {
   },
   computed: {
     ...mapState(useCategoryStore, {
-      allCategories: state => [{ value: [], text: 'None' }].concat(state.allCategoriesSelect),
+      allCategoriesBase: state => state.allCategoriesSelect,
     }),
+    allCategories: function () {
+      return [{ value: [], text: this.$t('category.ruleTypeNone') }].concat(this.allCategoriesBase);
+    },
     allRuleTypes: function () {
       return [
-        { value: 'none', text: 'None' },
-        { value: 'regex', text: 'Regular Expression' },
+        { value: 'none', text: this.$t('category.ruleTypeNone') },
+        { value: 'regex', text: this.$t('category.ruleTypeRegex') },
         //{ value: 'glob', text: 'Glob pattern' },
       ];
     },

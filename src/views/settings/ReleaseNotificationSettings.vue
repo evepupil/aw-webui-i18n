@@ -2,11 +2,11 @@
 div
   div.d-flex.justify-content-between
     div
-      h5.mb-0 New release notification
+      h5.mb-0 {{ $t('settings.releaseNotifications') }}
     div
       b-form-checkbox(v-model="isEnabled" switch)
   small
-    | We will send you a notification if there is a new release available for download, this check will happen at most once per day.
+    | {{ $t('settings.releaseNotificationsDescription') }}
 </template>
 
 <script lang="ts">

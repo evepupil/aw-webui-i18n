@@ -2,16 +2,16 @@
 div
   div.d-sm-flex.justify-content-between
     div
-      h5.mt-1.mb-2.mb-sm-0 Theme
+      h5.mt-1.mb-2.mb-sm-0 {{ $t('settings.theme') }}
     div
       b-select.landingpage(v-if="_loaded" size="sm" :value="theme", @change="theme = $event")
-        option(value="auto") Auto (System)
-        option(value="light") Light
-        option(value="dark") Dark
+        option(value="auto") {{ $t('settings.themeAuto') }}
+        option(value="light") {{ $t('settings.themeLight') }}
+        option(value="dark") {{ $t('settings.themeDark') }}
       span(v-else)
-        .aw-loading Loading...
+        .aw-loading {{ $t('common.loading') }}
   small
-    | Change color theme of the application (you need to change categories colors manually to be suitable with dark mode).
+    | {{ $t('settings.themeColorNote') }}
 </template>
 
 <script lang="ts">

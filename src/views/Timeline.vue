@@ -1,61 +1,61 @@
 <template lang="pug">
 div
-  h2 Timeline
+  h2 {{ $t('timeline.title') }}
 
   input-timeinterval(v-model="daterange", :defaultDuration="timeintervalDefaultDuration", :maxDuration="maxDuration").mb-3
 
   // blocks
   div.d-inline-block.border.rounded.p-2.mr-2
-    | Events shown:  {{ num_events }}
+    | {{ $t('timeline.eventsShown') }}  {{ num_events }}
   div.d-inline-block.border.rounded.p-2.mr-2
-    | Swimlanes:
+    | {{ $t('timeline.swimlanes') }}
     select(v-model="swimlane")
-      option(:value='null') None
-      option(value='category') Categories
-      option(value='bucketType') Bucket Specific
+      option(:value='null') {{ $t('timeline.swimlanesNone') }}
+      option(value='category') {{ $t('timeline.swimlanesCategory') }}
+      option(value='bucketType') {{ $t('timeline.swimlanesBucketType') }}
   details.d-inline-block.bg-light.small.border.rounded.mr-2.px-2
     summary.p-2
-      b Filters: {{ filter_summary }}
+      b {{ $t('timeline.filters') }} {{ filter_summary }}
     div.p-2.bg-light
       table
         tr
           th.pt-2.pr-3
-            label Host:
+            label {{ $t('timeline.filterHost') }}
           td
               select(v-model="filter_hostname")
-                option(:value='null') All
+                option(:value='null') {{ $t('common.all') }}
                 option(v-for="host in hosts", :value="host") {{ host }}
         tr
           th.pt-2.pr-3
-            label Client:
+            label {{ $t('timeline.filterClient') }}
           td
             select(v-model="filter_client")
-              option(:value='null') All
+              option(:value='null') {{ $t('common.all') }}
               option(v-for="client in clients", :value="client") {{ client }}
   div.d-inline-block.border.rounded.p-2.mr-2(v-if="num_events !== 0")
-    | Events shown: {{ num_events }}
+    | {{ $t('timeline.eventsShown') }} {{ num_events }}
   b-alert.d-inline-block.p-2.mb-0.mt-2(v-if="num_events === 0", variant="warning", show)
-    | No events match selected criteria. Timeline is not updated.
+    | {{ $t('timeline.noMatchingEvents') }}
   div.float-right.small.text-muted.pt-3
         tr
           th.pt-2.pr-3
-            label Duration:
+            label {{ $t('timeline.filterDuration') }}
           td
             select(v-model="filter_duration")
-              option(:value='null') All
-              option(:value='2') 2+ secs
-              option(:value='5') 5+ secs
-              option(:value='10') 10+ secs
-              option(:value='30') 30+ sec
-              option(:value='1 * 60') 1+ mins
-              option(:value='2 * 60') 2+ mins
-              option(:value='3 * 60') 3+ mins
-              option(:value='10 * 60') 10+ mins
-              option(:value='30 * 60') 30+ mins
-              option(:value='1 * 60 * 60') 1+ hrs
-              option(:value='2 * 60 * 60') 2+ hrs
+              option(:value='null') {{ $t('common.all') }}
+              option(:value='2') 2+ {{ $t('time.secs') }}
+              option(:value='5') 5+ {{ $t('time.secs') }}
+              option(:value='10') 10+ {{ $t('time.secs') }}
+              option(:value='30') 30+ {{ $t('time.secs') }}
+              option(:value='1 * 60') 1+ {{ $t('time.mins') }}
+              option(:value='2 * 60') 2+ {{ $t('time.mins') }}
+              option(:value='3 * 60') 3+ {{ $t('time.mins') }}
+              option(:value='10 * 60') 10+ {{ $t('time.mins') }}
+              option(:value='30 * 60') 30+ {{ $t('time.mins') }}
+              option(:value='1 * 60 * 60') 1+ {{ $t('time.hrs') }}
+              option(:value='2 * 60 * 60') 2+ {{ $t('time.hrs') }}
   div(style="float: right; color: #999").d-inline-block.pt-3
-    | Drag to pan and scroll to zoom
+    | {{ $t('timeline.dragToPan') }}
 
   div(v-if="buckets !== null")
     div(style="clear: both")
@@ -64,7 +64,7 @@ div
     aw-devonly(reason="Not ready for production, still experimenting")
       aw-calendar(:buckets="buckets")
   div(v-else)
-    h1.aw-loading Loading...
+    h1.aw-loading {{ $t('common.loading') }}
 </template>
 
 <script lang="ts">

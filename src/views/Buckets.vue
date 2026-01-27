@@ -3,7 +3,7 @@ div
   h2 {{ $t('buckets.title') }}
 
   b-alert(show)
-    i18n-t(keypath="buckets.moreWatchersHint" tag="span")
+    i18n(path="buckets.moreWatchersHint" tag="span")
       template(#link)
         a(href="https://activitywatch.readthedocs.io/en/latest/watchers.html") {{ $t('buckets.theDocs') }}
 

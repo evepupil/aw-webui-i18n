@@ -11,7 +11,7 @@ div
   p
     div {{ $t('home.thankYou') }}
     small
-      i18n-t(keypath="home.surveyMessage" tag="span")
+      i18n(path="home.surveyMessage" tag="span")
         template(#surveyLink)
           a(href="https://forms.gle/q2N9K5RoERBV8kqPA") {{ $t('home.userSurvey') }}
         template(#forumLink)
@@ -25,21 +25,21 @@ div
       p {{ $t('home.spreadMessage') }}
       ul
         li
-          i18n-t(keypath="home.alternativeTo" tag="span")
+          i18n(path="home.alternativeTo" tag="span")
             template(#link)
               a(href="https://alternativeto.net/software/activitywatch/") AlternativeTo
         li
-          i18n-t(keypath="home.productHunt" tag="span")
+          i18n(path="home.productHunt" tag="span")
             template(#link)
               a(href="https://www.producthunt.com/posts/activitywatch") ProductHunt
         li
-          i18n-t(keypath="home.socialMedia" tag="span")
+          i18n(path="home.socialMedia" tag="span")
             template(#twitterLink)
               a(href="https://twitter.com/ActivityWatchIt") Twitter
             template(#facebookLink)
               a(href="https://www.facebook.com/ActivityWatch") Facebook
         li
-          i18n-t(keypath="home.starOnGithub" tag="span")
+          i18n(path="home.starOnGithub" tag="span")
             template(#link)
               a(href="https://github.com/ActivityWatch/activitywatch") GitHub
 
@@ -52,7 +52,7 @@ div
         li #[a(href="https://liberapay.com/ActivityWatch/") Liberapay]
         li #[a(href="https://activitywatch.net/donate/") {{ $t('home.otherMethods') }}] {{ $t('home.includingCrypto') }}
       p
-        i18n-t(keypath="home.donationPageInfo" tag="span")
+        i18n(path="home.donationPageInfo" tag="span")
           template(#link)
             a(href="https://activitywatch.net/donate/") {{ $t('home.donationPage') }}
 
@@ -73,7 +73,7 @@ div
     div.col-md-6
       h4 {{ $t('home.workingOn') }}
       p
-        i18n-t(keypath="home.devUpdates" tag="span")
+        i18n(path="home.devUpdates" tag="span")
           template(#link)
             a(href="https://forum.activitywatch.net/c/news") {{ $t('home.developmentUpdates') }}
 
@@ -82,7 +82,7 @@ div
   p
     small
       i
-        i18n-t(keypath="home.landingPageHint" tag="span")
+        i18n(path="home.landingPageHint" tag="span")
           template(#settingsLink)
             router-link(to="/settings") {{ $t('home.settings') }}
 

@@ -86,4 +86,11 @@ export async function loadLocale(locale: LocaleCode): Promise<void> {
 // Set initial HTML lang attribute
 document.documentElement.setAttribute('lang', i18n.locale);
 
+// Load initial locale if not English
+const initialLocale = getInitialLocale();
+if (initialLocale !== 'en') {
+  // Load the locale asynchronously on startup
+  loadLocale(initialLocale);
+}
+
 export default i18n;

@@ -2,7 +2,7 @@
 div
   b-row
     b-col(cols="12", md="6").mb-2
-      b-form-group(label="Bucket")
+      b-form-group(:label="$t('topBucketData.bucket')")
         b-form-select(
           v-model="selectedBucketId",
           :options="bucketOptions",
@@ -11,7 +11,7 @@ div
     b-col(cols="12", md="6").mb-2
       b-form-group
         template(#label)
-          span Field in event data
+          span {{ $t('topBucketData.fieldInEventData') }}
           span.info-icon(
             title="Field names come from event data. Dot notation is supported (e.g., data.title)."
           ) i
@@ -28,14 +28,14 @@ div
         )
   b-alert.mt-2(v-if="error", show, variant="danger") {{ error }}
   b-alert.mt-2(v-else-if="!selectedBucketId" show variant="info")
-    | Select a watcher to load events for this period.
+    | {{ $t('topBucketData.selectWatcher') }}
   b-alert.mt-2(v-else-if="!loading && aggregated.length === 0" show variant="warning")
-    | No events found for this watcher and time range.
+    | {{ $t('topBucketData.noEventsFound') }}
 
   div.mt-2
     div.text-center.py-4(v-if="loading")
       b-spinner(small type="grow" label="Loading")
-      span.ml-2 Loading events...
+      span.ml-2 {{ $t('topBucketData.loadingEvents') }}
     aw-summary(
       v-else-if="aggregated.length",
       :fields="aggregated",
@@ -45,7 +45,7 @@ div
       with_limit
     )
     div.text-muted.text-center.py-4(v-else)
-      | Pick a field to see results.
+      | {{ $t('topBucketData.pickField') }}
 </template>
 
 <script lang="ts">
@@ -94,7 +94,7 @@ export default {
     },
     fieldSelectOptions(): { value: string; text: string }[] {
       const options = this.fieldOptions.map(f => ({ value: f, text: f }));
-      options.push({ value: '__custom', text: 'Custom field…' });
+      options.push({ value: '__custom', text: this.$t('topBucketData.customField') });
       return options;
     },
     selectedFieldValue(): string {

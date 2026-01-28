@@ -33,7 +33,7 @@ export default {
   },
   mounted: function () {
     periodusage.create(this.$el);
-    periodusage.set_status(this.$el, 'Loading...');
+    periodusage.set_status(this.$el, this.$t('common.loading'));
   },
   methods: {
     onPeriodClicked: function (period) {

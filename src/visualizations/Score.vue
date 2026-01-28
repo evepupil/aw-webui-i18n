@@ -1,14 +1,14 @@
 <template lang="pug">
 div
   div(style="text-align: center")
-    | Your total score today is:
+    | {{ $t('scoreVis.totalScoreToday') }}
     div(:style="'font-size: 2em; color: ' + (score >= 0 ? '#0A0' : '#F00')")
       | {{score >= 0 ? '+' : ''}}{{ (Math.round(score * 10) / 10).toFixed(1) }}
     div.small.text-muted
-      | ({{score_productive_percent.toFixed(1)}}% productive)
+      | ({{score_productive_percent.toFixed(1)}}% {{ $t('scoreVis.productive') }})
   hr
   div
-    b Top productive:
+    b {{ $t('scoreVis.topProductive') }}
     div.mt-2(v-for="cat in top_productive")
       div.d-flex
         div
@@ -21,7 +21,7 @@ div
             | +{{ (Math.round(cat.data.$total_score * 10) / 10).toFixed(1) }}
   hr
   div
-    b Top distracting:
+    b {{ $t('scoreVis.topDistracting') }}
     div.mt-2(v-for="cat in top_distracting")
       div.d-flex
         div

@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  h3 Alerts
+  h3 {{ $t('alerts.title') }}
 
   // TODO: Call this "goals" instead? (alerts is more general, but goals might fit the most common use better
   // TODO: Support 'less than' goals
@@ -8,7 +8,7 @@ div
   // TODO: Query from day start, not 24h ago
 
   b-alert(style="warning" show)
-    | This feature is still in early development.
+    | {{ $t('alerts.earlyDevelopment') }}
 
   b-alert(v-if="error" show variant="danger")
     | {{error}}
@@ -17,39 +17,39 @@ div
     b-button.float-right(@click="deleteAlert(alert.name)" size="sm" variant="outline-danger")
       icon(name="trash")
 
-    div Goal name: {{ alert.name }}
-    div Category: {{ alert.category.join(" > ") }}
-    div Current: {{ alertTime(alert.category) | friendlyduration }} / {{alert.goal}} minutes
+    div {{ $t('alerts.goalName', { name: alert.name }) }}
+    div {{ $t('alerts.category', { category: alert.category.join(" > ") }) }}
+    div {{ $t('alerts.current') }}: {{ alertTime(alert.category) | friendlyduration }} / {{alert.goal}} {{ $t('alerts.minutes') }}
       span(v-if="alertTime(alert.category) >= alert.goal")
         icon(name="check" style="color: #0C0")
       span(v-else)
         icon(name="times" color="#555")
 
   b-input-group.mt-3
-    b-btn(@click="check" variant="success") Check
+    b-btn(@click="check" variant="success") {{ $t('alerts.check') }}
     b-input-group-append
-      b-form-checkbox.my-2.ml-3(v-model="autorefresh", @change="toggleAutoRefresh", switch) Toggle autorefresh every 10s
+      b-form-checkbox.my-2.ml-3(v-model="autorefresh", @change="toggleAutoRefresh", switch) {{ $t('alerts.toggleAutorefresh') }}
 
   small(v-if="last_updated")
-    | Last updated: {{ last_updated }}
+    | {{ $t('alerts.lastUpdated', { time: last_updated }) }}
 
   hr
 
   div
-    h4 New alert
-    b-form-group(label="Name" label-cols-md=2)
+    h4 {{ $t('alerts.newAlert') }}
+    b-form-group(:label="$t('alerts.nameLabel')" label-cols-md=2)
       b-input(v-model="editing_alert.name")
-    b-form-group(label="Category" label-cols-md=2)
+    b-form-group(:label="$t('alerts.categoryLabel')" label-cols-md=2)
       b-select(v-model="editing_alert.category")
         option(v-for="category in categories" :value="category.value") {{ category.text }}
-    b-form-group(label="Goal" label-cols-md=2)
-      b-input-group(append="minutes")
+    b-form-group(:label="$t('alerts.goalLabel')" label-cols-md=2)
+      b-input-group(:append="$t('alerts.minutes')")
         b-input(v-model="editing_alert.goal" type="number")
 
     div
       b-btn(@click="addAlert" variant="success")
         icon(name="plus")
-        | Add alert
+        | {{ $t('alerts.addAlert') }}
 </template>
 
 <style scoped lang="scss"></style>

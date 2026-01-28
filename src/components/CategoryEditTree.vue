@@ -16,8 +16,8 @@ div
 
     div.col-4.col-md-8
       span.d-none.d-md-inline
-        span(v-if="_class.rule.type === 'regex'") Rule ({{_class.rule.type}}): #[code {{_class.rule.regex}}]
-        span(v-else, style="color: #888") No rule
+        span(v-if="_class.rule.type === 'regex'") {{ $t('categoryEdit.ruleRegex') }} ({{_class.rule.type}}): #[code {{_class.rule.regex}}]
+        span(v-else, style="color: #888") {{ $t('categoryEdit.noRule') }}
       span.float-right
         b-btn.ml-1.border-0(size="sm", variant="outline-secondary", @click="showEditModal(_class.id)" pill)
           icon(name="edit")
@@ -76,8 +76,8 @@ export default {
   methods: {
     addSubclass: function (parent) {
       this.categoryStore.addClass({
-        name: parent.name.concat(['New class']),
-        rule: { type: 'regex', regex: 'FILL ME' },
+        name: parent.name.concat([this.$t('categoryEdit.newClass')]),
+        rule: { type: 'regex', regex: this.$t('categoryEdit.fillMe') },
       });
 
       // Find the category with the max ID, and open an editor for it

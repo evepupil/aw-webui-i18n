@@ -1,10 +1,10 @@
 <template lang="pug">
 div
-  h1 Timespiral
+  h1 {{ $t('timespiral.title') }}
   b-alert(show, variant="info")
-    | This is a work-in-progress experiment.
-  div Bucket: {{ bucketId }}
-  div Events: {{ events.length }}
+    | {{ $t('timespiral.workInProgress') }}
+  div {{ $t('timespiral.bucket') }}: {{ bucketId }}
+  div {{ $t('timespiral.events') }}: {{ events.length }}
   Timespiral(:events="events")
 </template>
 

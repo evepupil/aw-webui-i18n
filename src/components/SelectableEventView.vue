@@ -2,10 +2,10 @@
 div
   div.form-group
     select.form-control(v-model="vis_method")
-      option(value="eventlist") Event List
-      option(value="timeline") Timeline
-      option(value="summary") Summary
-      option(value="raw") Raw JSON
+      option(value="eventlist") {{ $t('selectableEventView.eventList') }}
+      option(value="timeline") {{ $t('selectableEventView.timeline') }}
+      option(value="summary") {{ $t('selectableEventView.summary') }}
+      option(value="raw") {{ $t('selectableEventView.rawJson') }}
 
   div(v-if="vis_method == 'timeline'")
     vis-timeline(:buckets="[{'id': 'search', 'type': 'search', 'events': events}]")

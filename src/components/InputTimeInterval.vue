@@ -2,15 +2,15 @@
 div
   div
     b-alert(v-if="invalidDaterange", variant="warning", show)
-      | The selected date range is invalid. The second date must be greater or equal to the first date.
+      | {{ $t('timeInterval.invalidRange') }}
     b-alert(v-if="daterangeTooLong", variant="warning", show)
-      | The selected date range is too long. The maximum is {{ maxDuration/(24*60*60) }} days.
+      | {{ $t('timeInterval.rangeTooLong') }}
 
   div.d-flex.justify-content-between
     table
       tr
         td.pr-2
-          label.col-form-label.col-form-label-sm Show last
+          label.col-form-label.col-form-label-sm {{ $t('timeInterval.showLast') }}
         td(colspan=2)
           .btn-group(role="group")
             template(v-for="(dur, idx) in durations")
@@ -25,14 +25,14 @@ div
 
       tr
         td.pr-2
-          label.col-form-label.col-form-label-sm Show from
+          label.col-form-label.col-form-label-sm {{ $t('timeInterval.showFrom') }}
         td
           select(id="mode", v-model="mode", @change="valueChanged")
-            option(value='last_duration') Last duration
-            option(value='range') Date range
+            option(value='last_duration') {{ $t('timeInterval.lastDuration', { duration: '' }) }}
+            option(value='range') {{ $t('timeInterval.dateRange') }}
       tr(v-if="mode == 'last_duration'")
         th.pr-2
-          label(for="duration") Show last:
+          label(for="duration") {{ $t('timeInterval.showLast') }}:
         td
           select(id="duration", v-model="duration", @change="valueChanged")
             option(:value="15*60") 15min
@@ -44,7 +44,7 @@ div
             option(:value="12*60*60") 12h
             option(:value="24*60*60") 24h
       tr(v-if="mode == 'range'")
-        th.pr-2 Range:
+        th.pr-2 {{ $t('timeInterval.rangeLabel') }}:
         td
           input(type="date", v-model="start")
           input(type="date", v-model="end")
@@ -53,15 +53,15 @@ div
             type="button",
             :disabled="invalidDaterange || emptyDaterange || daterangeTooLong",
             @click="applyRange"
-          ) Apply
+          ) {{ $t('timeInterval.apply') }}
 
     div.text-muted.d-none.d-md-block(style="text-align:right" v-if="showUpdate")
       b-button.mt-2.px-2(@click="refresh()", variant="outline-dark", size="sm", style="opacity: 0.7")
         icon(name="sync")
         span.d-none.d-md-inline
-          | Refresh
+          | {{ $t('timeInterval.refresh') }}
       div.mt-2.small(v-if="lastUpdate")
-        | Last update: #[time(:datetime="lastUpdate.format()") {{lastUpdate | friendlytime}}]
+        | {{ $t('timeInterval.lastUpdate') }}: #[time(:datetime="lastUpdate.format()") {{lastUpdate | friendlytime}}]
 </template>
 
 <style scoped lang="scss">

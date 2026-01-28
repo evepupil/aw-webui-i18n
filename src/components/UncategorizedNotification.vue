@@ -3,11 +3,11 @@ div
   // TODO: Add some way to disable this notification, probably by making the ratio threshold configurable
   b-alert.my-2(v-if="isVisible", variant="info", show)
     p.mb-0
-      | #[b High uncategorized time]
+      b {{ $t('uncategorized.highTime') }}
       br
-      | You have a total of {{ uncategorizedDuration[0] | friendlyduration }} uncategorized time,
-      | that's {{ Math.round(100 * uncategorizedDuration[0] / uncategorizedDuration[1]) }}% of all time today.
-      | You can address this by using the #[router-link(:to="{ path: '/settings/category-builder' }") Category Builder].
+      | {{ $t('uncategorized.youHaveTotal', { duration: $options.filters.friendlyduration(uncategorizedDuration[0]), percentage: Math.round(100 * uncategorizedDuration[0] / uncategorizedDuration[1]) }) }}
+      |
+      | {{ $t('uncategorized.addressWith') }} #[router-link(:to="{ path: '/settings/category-builder' }") {{ $t('settings.categoryBuilder') }}].
 </template>
 
 <script lang="ts">

@@ -61,7 +61,7 @@ div
     div(style="clear: both")
     vis-timeline(:buckets="buckets", :showRowLabels='true', :queriedInterval="daterange", :swimlane="swimlane", :updateTimelineWindow='updateTimelineWindow')
 
-    aw-devonly(reason="Not ready for production, still experimenting")
+    aw-devonly(:reason="$t('timeline.notReadyForProduction')")
       aw-calendar(:buckets="buckets")
   div(v-else)
     h1.aw-loading {{ $t('common.loading') }}

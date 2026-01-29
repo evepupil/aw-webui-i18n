@@ -233,7 +233,9 @@
     "filterClient": "Client:",
     "filterDuration": "Duration:",
     "noMatchingEvents": "No events match selected criteria. Timeline is not updated.",
-    "dragToPan": "Drag to pan and scroll to zoom"
+    "dragToPan": "Drag to pan and scroll to zoom",
+    "notReadyForProduction": "Not ready for production, still experimenting",
+    "bucketsHidden": "Buckets with no events in the queried range will be hidden."
   },
   "stopwatch": {
     "title": "Stopwatch",

@@ -238,7 +238,9 @@
     "filterClient": "用戶端：",
     "filterDuration": "時長：",
     "noMatchingEvents": "沒有匹配所選條件的事件。時間軸未更新。",
-    "dragToPan": "拖曳平移，捲動縮放"
+    "dragToPan": "拖曳平移，捲動縮放",
+    "notReadyForProduction": "尚未準備好用於生產環境，仍在實驗中",
+    "bucketsHidden": "在查詢範圍內沒有事件的桶將被隱藏。"
   },
   "stopwatch": {
     "title": "計時器",

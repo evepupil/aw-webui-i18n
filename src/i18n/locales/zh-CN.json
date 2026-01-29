@@ -238,7 +238,9 @@
     "filterClient": "客户端：",
     "filterDuration": "时长：",
     "noMatchingEvents": "没有匹配所选条件的事件。时间线未更新。",
-    "dragToPan": "拖动平移，滚动缩放"
+    "dragToPan": "拖动平移，滚动缩放",
+    "notReadyForProduction": "尚未准备好用于生产环境，仍在实验中",
+    "bucketsHidden": "在查询范围内没有事件的桶将被隐藏。"
   },
   "stopwatch": {
     "title": "计时器",

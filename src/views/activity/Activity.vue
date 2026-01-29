@@ -79,7 +79,7 @@ div
   ul.row.nav.nav-tabs.mt-4
     li.nav-item(v-for="view in views")
       router-link.nav-link(:to="{ name: 'activity-view', params: {...$route.params, view_id: view.id}, query: $route.query}" :class="{'router-link-exact-active': currentView.id == view.id}")
-        h6 {{view.name}}
+        h6 {{ $te('views.' + view.id) ? $t('views.' + view.id) : view.name }}
 
     li.nav-item(style="margin-left: auto")
       a.nav-link(@click="$refs.new_view.show()")

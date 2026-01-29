@@ -694,5 +694,14 @@
     "newView": "新建视图",
     "viewId": "ID",
     "viewName": "名称"
+  },
+  "views": {
+    "summary": "摘要",
+    "window": "窗口",
+    "browser": "浏览器",
+    "editor": "编辑器"
+  },
+  "categoryTree": {
+    "showPercent": "显示百分比"
   }
 }

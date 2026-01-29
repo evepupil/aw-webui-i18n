@@ -689,5 +689,14 @@
     "newView": "New view",
     "viewId": "ID",
     "viewName": "Name"
+  },
+  "views": {
+    "summary": "Summary",
+    "window": "Window",
+    "browser": "Browser",
+    "editor": "Editor"
+  },
+  "categoryTree": {
+    "showPercent": "Show percent"
   }
 }

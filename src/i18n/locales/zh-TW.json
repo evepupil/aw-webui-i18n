@@ -694,5 +694,14 @@
     "newView": "新建視圖",
     "viewId": "ID",
     "viewName": "名稱"
+  },
+  "views": {
+    "summary": "摘要",
+    "window": "視窗",
+    "browser": "瀏覽器",
+    "editor": "編輯器"
+  },
+  "categoryTree": {
+    "showPercent": "顯示百分比"
   }
 }

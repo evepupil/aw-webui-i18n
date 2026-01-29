@@ -1,8 +1,23 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'moment/locale/zh-tw';
 import en from './locales/en.json';
 
 Vue.use(VueI18n);
+
+// Map i18n locale codes to moment locale codes
+const momentLocaleMap: Record<string, string> = {
+  'en': 'en',
+  'zh-CN': 'zh-cn',
+  'zh-TW': 'zh-tw',
+};
+
+function setMomentLocale(locale: string): void {
+  const momentLocale = momentLocaleMap[locale] || 'en';
+  moment.locale(momentLocale);
+}
 
 export type LocaleCode = 'en' | 'zh-CN' | 'zh-TW';
 
@@ -63,6 +78,7 @@ export async function loadLocale(locale: LocaleCode): Promise<void> {
     i18n.locale = locale;
     localStorage.setItem('locale', locale);
     document.documentElement.setAttribute('lang', locale);
+    setMomentLocale(locale);
     return;
   }
 
@@ -76,10 +92,12 @@ export async function loadLocale(locale: LocaleCode): Promise<void> {
     i18n.locale = locale;
     localStorage.setItem('locale', locale);
     document.documentElement.setAttribute('lang', locale);
+    setMomentLocale(locale);
   } catch (error) {
     console.error(`Failed to load locale: ${locale}`, error);
     // Fallback to English
     i18n.locale = 'en';
+    setMomentLocale('en');
   }
 }
 
@@ -88,6 +106,7 @@ document.documentElement.setAttribute('lang', i18n.locale);
 
 // Load initial locale if not English
 const initialLocale = getInitialLocale();
+setMomentLocale(initialLocale);
 if (initialLocale !== 'en') {
   // Load the locale asynchronously on startup
   loadLocale(initialLocale);
